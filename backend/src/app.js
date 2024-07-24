@@ -1,19 +1,27 @@
-//1. importamos las dependencias y módulos que necesitamos
-import express from 'express';
+// 1. Importar dependencias y módulos
+import express, { json } from 'express';
 import dotenv from 'dotenv';
-import connectionMongo from './config/dataBase.js';
-import cors from 'cors'
+import cors from 'cors';
+import { connectionMongo } from './config/dataBase.js';
+import userRouter from './routes/user.routes.js';
+import adminRouter from './routes/admin.routes.js';
 
-//2.Configurar el uso de nuestro servidor y de nuestras variables de
+// 2. Hacer las configuraciones
 const app = express();
-dotenv.config(); 
-const port = process.env.PORT;
-// connectionMongo();
+dotenv.config();
+// cors -> middlewares -> intemediario (mesero)
 app.use(cors());
-app.use(express.json());
 
+const port = process.env.PORT || 9000 ;
+// Condicional ternario
+// const port = process.env.PORT ? process.env.PORT : 6000;
 
-//3. escuchar nuestro servidor (ejecutarlo)
+connectionMongo();
+app.use(json())
+app.use('/users', userRouter);
+app.use('/admin', adminRouter);
+
+// 3. Escuchar nuestro servidor para poder ejecutar el app
 app.listen(port, ()=>{
-    console.log(`El servidor se está escuchando en: http://localhost:${port}`);
-});
+    console.log(`El puerto se está escuchando en: http://localhost:${port}`)
+}); 
