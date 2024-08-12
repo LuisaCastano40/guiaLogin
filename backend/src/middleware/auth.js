@@ -17,12 +17,12 @@ const auth = (requiredRole) => {
       const decoded = await verifyToken(token);
       console.log('Token decoded:', decoded);
 
-      // // verificamos rol
-      // if (requiredRole === 'admin' && !decoded.isAdmin) {
-      //   return res.status(403).json({ message: 'Access denied' });
-      // }
+      // verificamos rol
+      if (requiredRole === 'admin' && !decoded.isAdmin) {
+        return res.status(403).json({ message: 'Access denied' });
+      }
 
-      // req.user = decoded;
+      req.user = decoded;
       next();
     } catch (error) {
       // console.log('Failed to authenticate token:', error);

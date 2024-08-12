@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-registro',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './registro.component.css'
 })
 export class RegistroComponent {
-
+  @Input() toggleLogin : () => void = () => {}
 }

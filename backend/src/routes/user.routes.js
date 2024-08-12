@@ -11,16 +11,16 @@ import auth from '../middleware/auth.js';
 
 const userRouter = Router();
 
-// ruta para mostrar usuario por id
-userRouter.get('/:id', getUserById);
 // ruta para mostrar todos los usuarios
-userRouter.get('/', auth(), getUsers);
+userRouter.get('/', getUsers);
 // ruta para crear usuarios
 userRouter.post('/', postUser);
+// ruta para mostrar usuario por id
+userRouter.get('/:id', auth('admin'), getUserById);
 // ruta para actualizar usuario por id
-userRouter.put('/:id', auth(), putUserById);
+userRouter.put('/:id', auth('admin'), putUserById);
 // ruta para eleiminar usuario por Id
-userRouter.delete('/:id', auth(), deleteUserById);
+userRouter.delete('/:id', auth('admin'), deleteUserById);
 
 export default userRouter;
 
