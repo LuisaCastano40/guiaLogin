@@ -21,13 +21,14 @@ export class AuthService {
     return this.httpClient.post(this.API_URL, credential);
   }
 
+  // Obtener el token generado al iniciar sesión
+  getToken() {
+    return localStorage.getItem('token');  // Obtiene el token del localStorage
+  }
+
   //Validaciónn si se está logeado o no
-  isLogin() {
-    if (localStorage.getItem('token')) {
-      return true;
-    } else {
-      return false;
-    }
+  isLogged() {
+    return this.getToken() ? true : false ;
   }
 
   // Hacemos el cierre de sesión
