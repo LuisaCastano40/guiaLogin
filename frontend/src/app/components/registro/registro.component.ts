@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class RegistroComponent {
   @Input() toggleLogin : () => void = () => {}
+  @Input() closeModal: () => void = () => { };
 }

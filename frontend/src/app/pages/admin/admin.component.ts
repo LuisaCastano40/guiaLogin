@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class AdminComponent {
 
+  authService = inject(AuthService);
+
+  closeSesion(){
+    this.authService.logout();
+  }
 }

@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Credentials } from '../interfaces/credentials';
-import {jwtDecode} from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,11 @@ export class AuthService {
   private toastrService = inject(ToastrService);
   private router = inject(Router);
 
-  private API_URL = 'http://localhost:3000/login';
+  private API_URL = 'http://localhost:9000/login';
 
   // Hacemos la petición para verificar credenciales
-  login(credential: Credential) {
-    return this.httpClient.post(this.API_URL, credential);
+  login(credential: Credentials) {
+    return this.httpClient.post(this.API_URL, credential)
   }
 
   // Obtener el token generado al iniciar sesión
@@ -38,28 +38,33 @@ export class AuthService {
         console.error('Error decoding token:', error);
         return false;
       }
-    } 
+    }
   }
 
   // Redirigir según el rol del usuario
   redirectUser() {
     if (this.isAdmin()) {
-      this.router.navigate(['/admin']);
+      window.location.href = '/admin';
     } else {
-      this.router.navigate(['/']);
+      window.location.href = '/';
     }
   }
 
   //Validaciónn si se está logeado o no
   isLogged() {
-    return this.getToken() ? true : false ;
+    return this.getToken() ? true : false;
   }
 
   // Hacemos el cierre de sesión
   logout() {
     this.toastrService.info('Sesión cerrada', 'Adiós');
     localStorage.removeItem('token');
-    this.router.navigate(['/']);
+    setTimeout(()=>{
+      window.location.href = '/';
+    }, 250);
   }
 
 }
+
+
+
