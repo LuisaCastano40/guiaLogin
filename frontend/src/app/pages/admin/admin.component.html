@@ -32,3 +32,20 @@
     <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
+
+
+<ul>
+    @for (user of allUsers; track $index) {
+        <li>Nombre</li>
+        <li>{{user.nombreCompleto}}</li>
+        <li>correo</li>
+        <li>{{user.correo}}</li>
+        <li>Tipo de usuario</li>
+        <li>{{ user.categoriaAdmin === true ? 'Administrador' : 'Usuario normal' }}</li>
+        <li>
+            <button type="button" class="btn btn-danger" (click)="borrarDatos(user._id)">
+                Eliminar
+            </button>
+        </li>
+    }
+</ul>

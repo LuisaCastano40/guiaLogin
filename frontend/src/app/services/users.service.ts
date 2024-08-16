@@ -8,7 +8,7 @@ import { User } from '../interfaces/user';
 export class UsersService {
 
   private httpClient = inject(HttpClient);
-  private API_URL = 'http://localhost:3000/users';
+  private API_URL = 'http://localhost:9000/users';
 
    //obtener datos
    getUsers() {
@@ -22,7 +22,7 @@ export class UsersService {
   }
 
   //eliminar
-  deleteUser(id: string) {
-    return this.httpClient.delete(`${this.API_URL}/${id}`);
+  deleteUser(id: string, options?: any) {
+    return this.httpClient.delete(`${this.API_URL}/${id}`, options);
   }
 }
